@@ -1,5 +1,7 @@
 import React, {memo, useCallback, useMemo, useState} from 'react';
-
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "./store";
+import {setTheme} from "./store/slice";
 import CustomButton from "./components/CustomButton";
 import TimeContainer from "./components/TimeContainer";
 
@@ -8,8 +10,10 @@ function formatTime(time:number):string{
 }
 
 const MainFile = () => {
+    const dispatch = useDispatch();
+    const {theme} = useSelector((state: RootState) => state.timer);
 
-    const [totalSeconds, setTotalSeconds] = useState<number>(58);
+    const [totalSeconds, setTotalSeconds] = useState<number>(0);
     const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>();
 
     const start = useCallback(()=>{
@@ -47,7 +51,12 @@ const MainFile = () => {
     },[totalSeconds]);
 
     return (
-        <div className={'relative w-full h-full flex justify-center items-center flex-col font-sans'}>
+        <div className={`relative w-full h-full flex justify-center items-center flex-col font-sans 
+        ${theme === 'light' ? 'bg-zinc-200 text-zinc-600' : 'bg-zinc-900 text-zinc-400'}`}>
+            <div className={'relative w-[30%] flex justify-evenly items-center'}>
+                <button onClick={()=>dispatch(setTheme('light'))}>light</button>
+                <button onClick={()=>dispatch(setTheme('dark'))}>dark</button>
+            </div>
             <div className={'text-amber-400 text-8xl h-[100px] overflow-hidden min-w-[400px]' +
                 ' relative w-[30%] flex justify-between items-center'}>
                 <TimeContainer key={`h${hours}`} time={formatTime(hours)} intervalId={intervalId} delay={3599800} />

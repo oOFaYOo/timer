@@ -7,6 +7,10 @@ export interface ICustomButton {
 
 export interface ITimeContainer {
     time: string,
-    intervalId: any,
+    intervalId: NodeJS.Timer | undefined,
     delay:number
+}
+
+export interface IInitialState {
+    theme: 'dark'|'light'
 }
