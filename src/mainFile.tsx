@@ -2,6 +2,7 @@ import React, {memo, useCallback, useMemo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "./store";
 import {setTheme} from "./store/slice";
+import './mainFile.css';
 import CustomButton from "./components/CustomButton";
 import TimeContainer from "./components/TimeContainer";
 
@@ -51,23 +52,21 @@ const MainFile = () => {
     },[totalSeconds]);
 
     return (
-        <div className={`relative w-full h-full flex justify-center items-center flex-col font-sans 
-        ${theme === 'light' ? 'bg-zinc-200 text-zinc-600' : 'bg-zinc-900 text-zinc-400'}`}>
-            <div className={'relative w-[30%] flex justify-evenly items-center'}>
+        <div className={`flex-container mainFile_mainContainer ${theme === 'light' ? 'mainFile_mainContainer_light' : 'mainFile_mainContainer_dark'}`}>
+            <div className={'flex-container'} style={{width:'30%', justifyContent:'space-evenly'}}>
                 <button onClick={()=>dispatch(setTheme('light'))}>light</button>
                 <button onClick={()=>dispatch(setTheme('dark'))}>dark</button>
             </div>
-            <div className={'text-amber-400 text-8xl h-[100px] overflow-hidden min-w-[400px]' +
-                ' relative w-[30%] flex justify-between items-center'}>
+            <div className={'flex-container-between'} style={{fontSize:'6rem', height:'100px', overflow:'hidden'}}>
                 <TimeContainer key={`h${hours}`} time={formatTime(hours)} intervalId={intervalId} delay={3599800} />
-                <span className={'text-zinc-400 pb-4'}>:</span>
+                <span className={'timeSeparator'}>:</span>
                 <TimeContainer key={`m${minutes}`} time={formatTime(minutes)} intervalId={intervalId} delay={59800} />
-                <span className={'text-zinc-400 pb-4'}>:</span>
+                <span className={'timeSeparator'}>:</span>
                 <TimeContainer key={`s${seconds}`} time={formatTime(seconds)} intervalId={intervalId} delay={800}/>
             </div>
-            <div className={'relative w-[30%] text-6xl flex min-w-[400px] justify-between items-center'}>
+            <div className={'flex-container-between'} style={{fontSize:'3.75rem'}}>
                 <CustomButton callBack={start} title={'start'} isActive={intervalId !== undefined} />
-                <CustomButton callBack={stop} title={'stop'} />
+                <CustomButton callBack={stop} title={'stop'} isActive={intervalId === undefined && totalSeconds !== 0}/>
                 <CustomButton callBack={reset} title={'reset'} />
             </div>
         </div>

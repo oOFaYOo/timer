@@ -14,34 +14,3 @@ body {
     position: relative;
 }
 
-.appear {
-    animation-duration: 400ms;
-    animation-name: slidein;
-    position: relative;
-}
-
-@keyframes slidein {
-    from {
-        top:-100%;
-    }
-
-    to {
-        top:0;
-    }
-}
-
-.disappear {
-    animation-duration: 400ms;
-    animation-name: slideout;
-    position: relative;
-}
-
-@keyframes slideout {
-    from {
-        top:0;
-    }
-
-    to {
-        top:100%;
-    }
-}

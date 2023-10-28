@@ -1,0 +1,33 @@
+.mainTimeContainer {
+    position: relative;
+    animation-duration: 400ms;
+    color: rgb(251 191 36);
+}
+
+.appear {
+    animation-name: slidein;
+}
+
+@keyframes slidein {
+    from {
+        top:-100%;
+    }
+
+    to {
+        top:0;
+    }
+}
+
+.disappear {
+    animation-name: slideout;
+}
+
+@keyframes slideout {
+    from {
+        top:0;
+    }
+
+    to {
+        top:100%;
+    }
+}

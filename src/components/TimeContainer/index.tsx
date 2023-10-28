@@ -1,5 +1,5 @@
-import React, {memo, useEffect, useRef, useState} from 'react'
-
+import React, {memo, useEffect, useRef, useState} from 'react';
+import './index.css';
 import {ITimeContainer} from "../../types";
 
 const TimeContainer = ({time, intervalId, delay}: ITimeContainer) => {
@@ -34,7 +34,7 @@ const TimeContainer = ({time, intervalId, delay}: ITimeContainer) => {
     }, [time, intervalId, delay])
 
     return (
-        <div ref={div} className={`${time === '00' || !intervalId ? '' : 'appear'}`}>
+        <div ref={div} className={`mainTimeContainer ${time === '00' || !intervalId ? '' : 'appear'}`}>
             {time}
         </div>
     )

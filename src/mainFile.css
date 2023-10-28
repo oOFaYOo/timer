@@ -1,0 +1,37 @@
+.timeSeparator {
+    color: rgb(161 161 170);
+    padding-bottom: 16px;
+}
+
+.flex-container-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    min-width: 400px;
+    width: 30%;
+}
+
+.flex-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.mainFile_mainContainer {
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Century Gothic", sans-serif;
+}
+
+.mainFile_mainContainer_light {
+    background-color: rgb(228 228 231);
+    color: rgb(82 82 91);
+}
+
+.mainFile_mainContainer_dark {
+    background-color: rgb(24 24 27);
+    color: rgb(161 161 170);
+}
