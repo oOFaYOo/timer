@@ -67,7 +67,7 @@ const MainFile = () => {
             </div>
             <div className={'relative w-[30%] text-6xl flex min-w-[400px] justify-between items-center'}>
                 <CustomButton callBack={start} title={'start'} isActive={intervalId !== undefined} />
-                <CustomButton callBack={stop} title={'stop'} />
+                <CustomButton callBack={stop} title={'stop'} isActive={intervalId === undefined && totalSeconds !== 0} />
                 <CustomButton callBack={reset} title={'reset'} />
             </div>
         </div>
