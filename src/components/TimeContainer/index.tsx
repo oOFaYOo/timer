@@ -1,43 +1,44 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, {memo, useEffect, useRef, useState} from 'react'
+
 import {ITimeContainer} from "../../types";
 
-const TimeContainer = ({time, intervalId, delay}:ITimeContainer) => {
+const TimeContainer = ({time, intervalId, delay}: ITimeContainer) => {
 
     const [update, setUpdate] = useState<boolean>(false);
+    const div = useRef<HTMLDivElement | null>(null);
 
-    const custDiv = useRef<HTMLDivElement | null>(null);
-
-    if(update && intervalId){
-        custDiv.current?.classList.remove('appear');
-        custDiv.current?.classList.add('disappear')
+    if (update && intervalId) {
+        div.current?.classList.remove('appear');
+        div.current?.classList.add('disappear')
     }
 
-    useEffect(()=>{
-        let timerID:NodeJS.Timer;
-        if(intervalId !== undefined) {
-            if(time !== '00') {
-                timerID = setTimeout(() => {
-                    setUpdate(true)
-                }, delay)} else if (time === '00') {
-                    timerID = setTimeout(() => {
-                        custDiv.current?.classList.add('disappear');
-                        setUpdate(true)
-                    }, delay);
+    useEffect(() => {
+        let timerId: NodeJS.Timer;
+        if (intervalId !== undefined) {
+            timerId = setTimeout(() => {
+                if (time === '00') {
+                    div.current?.classList.add('disappear');
                 }
-            }else return ()=>{
-            clearTimeout(timerID);
-            setUpdate(false)
-            if(time !== '00') {
-                custDiv.current?.classList.remove('disappear');
-                custDiv.current?.classList.remove('appear');
+                setUpdate(true)
+            }, delay);
+        } else {
+            return () => {
+                clearTimeout(timerId);
+                setUpdate(false)
+                if (time !== '00') {
+                    div.current?.classList.remove('disappear');
+                    div.current?.classList.remove('appear');
+                }
             }
         }
     }, [time, intervalId, delay])
 
     return (
-            <div ref={custDiv} className={`${time === '00' || !intervalId ? '' : 'appear'}`}>{time}</div>
-        )
+        <div ref={div} className={`${time === '00' || !intervalId ? '' : 'appear'}`}>
+            {time}
+        </div>
+    )
 
 }
 
-export default TimeContainer;
+export default memo(TimeContainer);

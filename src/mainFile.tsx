@@ -1,4 +1,5 @@
-import React, {memo, useCallback, useMemo, useRef, useState} from 'react';
+import React, {memo, useCallback, useMemo, useState} from 'react';
+
 import CustomButton from "./components/CustomButton";
 import TimeContainer from "./components/TimeContainer";
 
@@ -7,7 +8,8 @@ function formatTime(time:number):string{
 }
 
 const MainFile = () => {
-    const [totalSeconds, setTotalSeconds] = useState<number>(3597);
+
+    const [totalSeconds, setTotalSeconds] = useState<number>(58);
     const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>();
 
     const start = useCallback(()=>{
@@ -24,8 +26,7 @@ const MainFile = () => {
     const stop = useCallback(() => {
             clearInterval(intervalId);
             setIntervalId(undefined)
-        }
-    , [intervalId, totalSeconds]);
+        }, [intervalId]);
 
     const reset = useCallback(() => {
         clearInterval(intervalId);
@@ -47,7 +48,8 @@ const MainFile = () => {
 
     return (
         <div className={'relative w-full h-full flex justify-center items-center flex-col font-sans'}>
-            <div className={'text-amber-400 text-8xl h-[100px] overflow-hidden min-w-[400px]  relative w-[30%] flex justify-between items-center'}>
+            <div className={'text-amber-400 text-8xl h-[100px] overflow-hidden min-w-[400px]' +
+                ' relative w-[30%] flex justify-between items-center'}>
                 <TimeContainer key={`h${hours}`} time={formatTime(hours)} intervalId={intervalId} delay={3599800} />
                 <span className={'text-zinc-400 pb-4'}>:</span>
                 <TimeContainer key={`m${minutes}`} time={formatTime(minutes)} intervalId={intervalId} delay={59800} />
