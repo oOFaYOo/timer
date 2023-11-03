@@ -13,7 +13,7 @@ const MainFile = () => {
     const dispatch = useDispatch();
     const {theme} = useSelector((state: RootState) => state.timer);
 
-    const [totalSeconds, setTotalSeconds] = useState<number>(0);
+    const [totalSeconds, setTotalSeconds] = useState<number>(190);
     const [intervalId, setIntervalId] = useState<NodeJS.Timer | undefined>();
 
     const start = useCallback(()=>{
